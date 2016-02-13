@@ -5,14 +5,14 @@ import opc
 import sys
 from PIL import Image
 
-address="172.16.2.217:9999"
+address="172.16.2.217:7890"
 MATRIX_WIDTH=128
 MATRIX_HEIGHT=64
 
 opcClient = opc.Client(address)
 
 if opcClient.can_connect():
-  print('connected to %s' % self.address)
+  print('connected to %s' % address)
 else:
   print "cannot connect!!"
   sys.exit(1)
@@ -29,7 +29,8 @@ while True:
   image = Image.frombuffer("RGB", (width,height) ,pb.pixel_array, 'raw', 'RGB', 0, 1)
   image.transpose(Image.FLIP_TOP_BOTTOM)
   image_width, image_height = image.size
-  
+ 
+  image.thumbnail((MATRIX_WIDTH, MATRIX_HEIGHT), Image.ANTIALIAS) 
   x_offset=0
   y_offset=0
   cropped_image = image.crop((

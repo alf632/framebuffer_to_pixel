@@ -30,6 +30,8 @@ while True:
   image_width, image_height = image.size
  
   image.thumbnail((MATRIX_WIDTH, MATRIX_HEIGHT), Image.ANTIALIAS) 
+  b, g, r = image.split()
+  image = Image.merge("RGB", (r, g, b))
   x_offset=0
   y_offset=0
   cropped_image = image.crop((

@@ -38,6 +38,5 @@ while True:
               MATRIX_WIDTH + x_offset,  # right
               MATRIX_HEIGHT + y_offset  # lower
           ))
-  cropped_image.transpose(Image.FLIP_TOP_BOTTOM)
-  data = cropped_image.tobytes()[::-1]
+  data = cropped_image.tobytes()
   opcClient.put_data(data, channel=0)

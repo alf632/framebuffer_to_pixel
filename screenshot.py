@@ -27,7 +27,6 @@ while True:
   width=pb.get_width()
   
   image = Image.frombuffer("RGB", (width,height) ,pb.pixel_array, 'raw', 'RGB', 0, 1)
-  image.transpose(Image.FLIP_TOP_BOTTOM)
   image_width, image_height = image.size
  
   image.thumbnail((MATRIX_WIDTH, MATRIX_HEIGHT), Image.ANTIALIAS) 
@@ -39,6 +38,6 @@ while True:
               MATRIX_WIDTH + x_offset,  # right
               MATRIX_HEIGHT + y_offset  # lower
           ))
-  
+  cropped_image.transpose(Image.FLIP_TOP_BOTTOM)
   data = cropped_image.tobytes()[::-1]
   opcClient.put_data(data, channel=0)
